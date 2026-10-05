@@ -1,0 +1,6 @@
+{
+  "name": "WH-Questions with TO BE",
+  "description": "Learn, practice and master WH-questions with the verb TO BE for SENA English apprentices.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
