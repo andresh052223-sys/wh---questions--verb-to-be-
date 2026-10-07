@@ -31,7 +31,7 @@ function shuffleArray<T>(array: T[]): T[] {
   return arr;
 }
 
-const QUESTION_TIME_LIMIT = 20; // 20 seconds per question
+const QUESTION_TIME_LIMIT = 40; // 40 seconds per question as requested
 const TOTAL_QUESTIONS_COUNT = 30; // 30 questions in total
 
 interface WordChip {
@@ -233,9 +233,9 @@ export const ActivityOneOrganize: React.FC<ActivityOneProps> = ({
   // Disappearing time percentage (from 100% down to 0%)
   const timeBarPercent = (timeLeft / QUESTION_TIME_LIMIT) * 100;
   const timeBarColor =
-    timeLeft <= 5
+    timeLeft <= 10
       ? 'bg-rose-500'
-      : timeLeft <= 10
+      : timeLeft <= 20
       ? 'bg-amber-500'
       : 'bg-emerald-500';
 
@@ -256,7 +256,7 @@ export const ActivityOneOrganize: React.FC<ActivityOneProps> = ({
           </h3>
 
           <p className="text-slate-600 text-lg mt-2">
-            You completed all 30 timed WH-questions with 20 seconds per question.
+            You completed all 30 timed WH-questions with 40 seconds per question.
           </p>
 
           <div className="grid grid-cols-3 gap-4 my-8 max-w-md mx-auto">
@@ -303,7 +303,7 @@ export const ActivityOneOrganize: React.FC<ActivityOneProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-5">
         <div>
           <span className="text-xs font-bold text-emerald-700 uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-md border border-emerald-200">
-            Section 3 • Timed Challenge (20s)
+            Section 3 • Timed Challenge (40s)
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">
             3. Activity 1 – Put the Question in Order
@@ -359,7 +359,7 @@ export const ActivityOneOrganize: React.FC<ActivityOneProps> = ({
               Context: {currentQuestion.category}
             </span>
             <span className="text-xs font-bold text-slate-400">
-              Tiempo: 20 segundos
+              Tiempo: 40 segundos
             </span>
           </div>
 
@@ -376,14 +376,14 @@ export const ActivityOneOrganize: React.FC<ActivityOneProps> = ({
           {/* DISAPPEARING TIME BAR RIGHT BELOW THE SPANISH QUESTION */}
           <div className="mt-3 space-y-1">
             <div className="flex items-center justify-between text-xs font-black">
-              <span className={`transition-colors ${timeLeft <= 5 ? 'text-rose-600 animate-pulse' : 'text-slate-600'}`}>
+              <span className={`transition-colors ${timeLeft <= 10 ? 'text-rose-600 animate-pulse' : 'text-slate-600'}`}>
                 {status === 'timeup'
                   ? '¡Tiempo agotado!'
                   : status === 'correct'
                   ? '¡Respuesta correcta!'
                   : `Tiempo restante: ${timeLeft}s`}
               </span>
-              <span className="text-slate-400 font-mono">{timeLeft} / 20s</span>
+              <span className="text-slate-400 font-mono">{timeLeft} / 40s</span>
             </div>
 
             {/* The Disappearing Bar */}
@@ -503,7 +503,7 @@ export const ActivityOneOrganize: React.FC<ActivityOneProps> = ({
             <div className="flex items-center gap-3">
               <AlertTriangle className="w-7 h-7 text-rose-600 shrink-0" />
               <div>
-                <p className="text-base sm:text-lg font-black">¡Tiempo agotado! (20 segundos)</p>
+                <p className="text-base sm:text-lg font-black">¡Tiempo agotado! (40 segundos)</p>
                 <p className="text-xs sm:text-sm text-rose-800 mt-0.5">
                   El orden correcto era: <span className="font-bold underline">{currentQuestion.words.join(' ')}</span>
                 </p>

@@ -30,7 +30,7 @@ function shuffleArray<T>(array: T[]): T[] {
   return arr;
 }
 
-const SET_TIME_LIMIT = 60; // 1 minute (60s)
+const SET_TIME_LIMIT = 80; // 80 seconds as requested
 const TOTAL_SETS_COUNT = 10;
 const STORAGE_APPROVED_SETS_KEY = 'sena_wh_approved_matching_indices';
 
@@ -146,13 +146,13 @@ export const ActivityTwoMatching: React.FC<ActivityTwoProps> = ({
     };
   }, [isActivityCompleted, errorState, currentActivityIndex]);
 
-  // Handle 1-minute time expired -> Stop and show repeat button!
+  // Handle 80-second time expired -> Stop and show repeat button!
   const handleTimeExpired = () => {
     sound.playError();
     setErrorState({
       questionId: '',
       answerId: '',
-      message: '¡Se agotó el minuto de tiempo para esta actividad!',
+      message: '¡Se agotaron los 80 segundos de tiempo para esta actividad!',
     });
   };
 
@@ -297,12 +297,12 @@ export const ActivityTwoMatching: React.FC<ActivityTwoProps> = ({
   const matchedCount = Object.keys(matchedPairs).length;
   const allActivitiesApproved = approvedIndices.length === TOTAL_SETS_COUNT;
 
-  // Disappearing time line calculation (60s)
+  // Disappearing time line calculation (80s)
   const timeBarPercent = (timeLeft / SET_TIME_LIMIT) * 100;
   const timeBarColor =
-    timeLeft <= 10
+    timeLeft <= 15
       ? 'bg-rose-500'
-      : timeLeft <= 25
+      : timeLeft <= 30
       ? 'bg-amber-500'
       : 'bg-emerald-500';
 
@@ -454,7 +454,7 @@ export const ActivityTwoMatching: React.FC<ActivityTwoProps> = ({
         <div className="flex items-center justify-between text-xs font-black">
           <div className="flex items-center gap-1.5">
             <Clock className="w-3.5 h-3.5 text-slate-500" />
-            <span className={timeLeft <= 10 && !isActivityCompleted ? 'text-rose-600 animate-pulse' : 'text-slate-700'}>
+            <span className={timeLeft <= 15 && !isActivityCompleted ? 'text-rose-600 animate-pulse' : 'text-slate-700'}>
               {errorState
                 ? '¡Actividad detenida por error!'
                 : isActivityCompleted
@@ -462,7 +462,7 @@ export const ActivityTwoMatching: React.FC<ActivityTwoProps> = ({
                 : `Tiempo restante: ${timeLeft}s`}
             </span>
           </div>
-          <span className="text-slate-400 font-mono text-xs">{timeLeft} / 60s</span>
+          <span className="text-slate-400 font-mono text-xs">{timeLeft} / 80s</span>
         </div>
 
         {/* Disappearing Progress Bar */}
